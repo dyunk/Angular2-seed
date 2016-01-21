@@ -1,6 +1,16 @@
 # Angular2-seed
-just an Angular2 seed project with some components, directives and pipes...
+just an Angular2 seed project made in Typescript with some components, directives and pipes...
 
+### Arquitecture
+I have choose a folder structure like this:
+- src: typescript files
+  - components:
+  - directives:
+  - pipes:
+  - services:
+  - boot.ts (app initializer)
+- template: views
+- app: typescript compiled files ("outDir" at tsconfig.json)
 
 ### Angular2
 to launch:
