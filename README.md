@@ -13,6 +13,6 @@ I have choose a folder structure like this:
 - app: typescript compiled files ("outDir" at tsconfig.json)
 
 ### Angular2
-to launch:
+to run:
 - npm install (if node_modules is missing)
 - npm start (this command compile typescript, watches for changes in generated js files and launches a lite server)
