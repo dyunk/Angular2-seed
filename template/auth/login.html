@@ -1,0 +1,13 @@
+<h2>Login</h2>
+<!-- template -->
+<!-- On form submit, we call the Login event with the username and the password from the inputs -->
+<form (submit)="login($event, username.value, password.value)">
+  <label for="username">{{"Usuari" | i18n}}</label>
+  <!-- Using #username, we can identify this input to get the value on the form"s submit event -->
+  <input type="text"  #username class="form-control" id="username" placeholder="{{'Usuari' | i18n}}">
+  <label for="password">{{"Paraula clau" | i18n}}</label>
+  <!-- Using #password we can identify this input to get its value -->
+  <input type="password" #password class="form-control" id="password" placeholder="{{'Paraula clau' | i18n}}">
+  <br/>
+  <button class="btn btn-primary" type="submit">{{"Enviar" | i18n}}</button>
+</form>

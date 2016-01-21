@@ -1,0 +1,6 @@
+<div *ngIf="heroes">
+  <grid [page]="page" [columns]="columnDefs" [rows]="heroes" [enableSort]="enableSort"
+    [enableSort]="enableFileter" (filterChanged)="onFilterChanged($event)"
+		(rowSelected)="onRowSelected($event)" (pageChanged)="onPageChanged($event)"
+		(sortSelected)="onSortSelected($event)"></grid>
+</div>

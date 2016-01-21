@@ -1,0 +1,81 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="dataTables_wrapper">
+			<table class="table table-striped table-hover table-condensed table-bordered">
+				<thead>
+					<tr>
+						<th *ngFor="#col of columns" width={{col.width}}px;
+						[class.sorting]="enableSort && key !== col.field"
+						[class.sorting_asc]="enableSort && key === col.field && direction === 'asc'"
+						[class.sorting_desc]="enableSort && key === col.field && direction === 'desc'"
+						(click)="sort(col.field)"
+						>
+							{{col.headerName | i18n}}
+
+							<!-- tipo de filtro 'text' -->
+							<div *ngIf="enableFilter && col.filter == 'text'" class="filter-wrapper" style="height:45px">
+								<input type="text" #box placeholder="{{'escrigui' | i18n}}..." (keyup)="filter(box.value, col.field)">
+								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box.value = ''; filter(box.value, col.field);">
+							</div>
+
+							<!-- tipo de filtro 'range' -->
+							<div *ngIf="enableFilter && col.filter == 'range'" class="filter-wrapper" style="height:45px">
+								<div class="yadcf-filter-wrapper-inner">
+									<input type="text" #box1 placeholder="{{'de' | i18n}}..." (keyup)="filter(box1.value, col.filterFields[0])">
+									|
+									<input type="text" #box2 placeholder="{{'a' | i18n}}..." (keyup)="filter(box2.value, col.filterFields[1])">
+								</div>
+								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box1.value = ''; box2.value = ''; filter(box1.value, col.filterFields[0]); filter(box2.value, col.filterFields[1]);">
+							</div>
+
+							<!-- tipo de filtro 'select' -->
+							<div *ngIf="enableFilter && col.filter == 'select'" class="filter-wrapper" style="height:45px">
+								<select #box class="yadcf-filter" (change)="filter(box.value, col.field)" >
+									<option value=""></option>
+									<option *ngFor="#option of options[col.field]" value="{{option.key}}">{{option.value}}</option>
+								</select>
+								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box.value = ''; filter(box.value, col.field);">
+							</div>
+
+							<div *ngIf="enableFilter && col.filter == 'none'" style="height:45px">
+							</div>
+						</th>
+					</tr>
+				</thead>
+
+				<tfoot>
+					<tr>
+						<th *ngFor="#col of columns">{{col.headerName | i18n}}</th>
+					</tr>
+				</tfoot>
+
+				<tbody>
+					<tr *ngFor="#row of rows" (click)="select(row)">
+						<td *ngFor="#col of columns">{{row[col.field]}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="dataTables_info">{{'Showing from'}} {{1 + ((page.actual) * page.recordsPerPage)}} {{'to'}} {{(page.actual) * page.recordsPerPage + rows.length}} {{'of'}} {{page.totalRecords}}</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="dataTables_paginate paging_simple_numbers">
+						<ul class="pagination">
+							<li class="paginate_button first" [class.disabled]="page.actual < 1"><a (click)="goTo(0)"><<</a></li>
+							<li class="paginate_button" [class.disabled]="page.actual < 1"><a (click)="goTo(page.actual - 1)"><</a></li>
+							<li *ngIf="page.actual > 1 && page.actual == page.last" class="paginate_button"><a (click)="goTo(page.actual - 2)">{{page.actual - 2}}</a></li>
+							<li *ngIf="page.actual > 0" class="paginate_button previous"><a (click)="goTo(page.actual - 1)">{{page.actual - 1}}</a></li>
+							<li class="paginate_button active"><a>{{page.actual}}</a></li>
+							<li *ngIf="page.actual < page.last"class="paginate_button next"><a (click)="goTo(page.actual + 1)">{{page.actual + 1}}</a></li>
+							<li *ngIf="page.actual < page.last && page.actual == 0 && (page.actual+2) <= page.last " class="paginate_button"><a (click)="goTo(page.actual + 2)">{{page.actual + 2}}</a></li>
+							<li class="paginate_button" [class.disabled]="page.actual == page.last"><a (click)="goTo(page.actual + 1)">></a></li>
+							<li class="paginate_button last" [class.disabled]="page.actual == page.last"><a (click)="goTo(page.last)">>></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

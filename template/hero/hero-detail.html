@@ -1,0 +1,14 @@
+<div *ngIf="hero">
+  <h3>{{hero.name}}</h3>
+  <div>
+    <label>{{"Id" | i18n}}: </label>{{hero.id}}</div>
+  <div>
+    <label for="name">Name: </label>
+    <input [(ngModel)]="hero.name" placeholder="name"/>
+  </div>
+  <div>
+    <label for="desc">{{"Description" | i18n}}: </label>
+    <input [(ngModel)]="hero.desc" placeholder="desc"/>
+  </div>
+  <button (click)="gotoHeroes()">{{"Back" | i18n}}</button>
+</div>
