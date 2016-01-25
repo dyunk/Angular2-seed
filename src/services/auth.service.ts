@@ -1,4 +1,5 @@
 import {Injectable, OnInit} from 'angular2/core';
+import {Observable} from 'rxjs/Observable';
 
 const JWT_KEY = "JWT";
 
@@ -14,7 +15,7 @@ export class AuthService implements OnInit {
   }
 
   isAuth() {
-    return !!localStorage.getItem(JWT_KEY);
+    return Observable.of(!!localStorage.getItem(JWT_KEY));
   }
 
   getUser() {

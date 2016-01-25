@@ -35,8 +35,8 @@ export class Grid {
     this.pageChanged = new EventEmitter();
     this.sortSelected = new EventEmitter();
     this.filterChanged = new EventEmitter();
-    this.enableSort = false;
-    this.enableFilter = false;
+    //this.enableSort = false;
+    //this.enableFilter = false;
   }
 
   select(row) {

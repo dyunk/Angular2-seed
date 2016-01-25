@@ -4,8 +4,12 @@ import {ROUTER_PROVIDERS, Location, LocationStrategy, HashLocationStrategy} from
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {AppComponent} from './components/app.component';
 import {AuthService} from './services/auth.service';
+import {appInjector} from './filters/app-injector';
 
 bootstrap(AppComponent, [AuthService,
   ROUTER_PROVIDERS, HTTP_PROVIDERS,
   provide(LocationStrategy, {useClass: HashLocationStrategy})
-]);
+]).then((appRef) => {
+  // store a reference to the injector
+  appInjector(appRef.injector);
+});

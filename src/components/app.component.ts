@@ -4,7 +4,6 @@ import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES, Router} from 'angular2/rou
 import {HomeComponent} from './home/home.component';
 import {HeroComponent} from './hero/hero.component';
 import {LoginComponent} from './auth/login.component';
-import {LoggedInRouterOutlet} from '../directives/logged-in-outlet.directive';
 import {I18nPipe} from '../pipes/i18n.pipe';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/Rx';
@@ -12,7 +11,7 @@ import 'rxjs/Rx';
 @Component({
     selector: 'app',
     templateUrl: 'template/main.html',
-    directives: [LoggedInRouterOutlet, ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES],
     pipes: [I18nPipe]
 })
 @RouteConfig([

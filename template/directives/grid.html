@@ -8,44 +8,42 @@
 						[class.sorting]="enableSort && key !== col.field"
 						[class.sorting_asc]="enableSort && key === col.field && direction === 'asc'"
 						[class.sorting_desc]="enableSort && key === col.field && direction === 'desc'"
-						(click)="sort(col.field)"
-						>
+						(click)="sort(col.field)">
 							{{col.headerName | i18n}}
-
-							<!-- tipo de filtro 'text' -->
-							<div *ngIf="enableFilter && col.filter == 'text'" class="filter-wrapper" style="height:45px">
-								<input type="text" #box placeholder="{{'escrigui' | i18n}}..." (keyup)="filter(box.value, col.field)">
-								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box.value = ''; filter(box.value, col.field);">
-							</div>
-
-							<!-- tipo de filtro 'range' -->
-							<div *ngIf="enableFilter && col.filter == 'range'" class="filter-wrapper" style="height:45px">
-								<div class="yadcf-filter-wrapper-inner">
-									<input type="text" #box1 placeholder="{{'de' | i18n}}..." (keyup)="filter(box1.value, col.filterFields[0])">
-									|
-									<input type="text" #box2 placeholder="{{'a' | i18n}}..." (keyup)="filter(box2.value, col.filterFields[1])">
-								</div>
-								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box1.value = ''; box2.value = ''; filter(box1.value, col.filterFields[0]); filter(box2.value, col.filterFields[1]);">
-							</div>
-
-							<!-- tipo de filtro 'select' -->
-							<div *ngIf="enableFilter && col.filter == 'select'" class="filter-wrapper" style="height:45px">
-								<select #box class="yadcf-filter" (change)="filter(box.value, col.field)" >
-									<option value=""></option>
-									<option *ngFor="#option of options[col.field]" value="{{option.key}}">{{option.value}}</option>
-								</select>
-								<input value="x" type="button" class="yadcf-filter-reset-button" (click)="box.value = ''; filter(box.value, col.field);">
-							</div>
-
-							<div *ngIf="enableFilter && col.filter == 'none'" style="height:45px">
-							</div>
 						</th>
 					</tr>
 				</thead>
 
-				<tfoot>
+				<tfoot *ngIf="enableFilter">
 					<tr>
-						<th *ngFor="#col of columns">{{col.headerName | i18n}}</th>
+						<th *ngFor="#col of columns">
+							<!-- tipo de filtro 'text' -->
+							<div *ngIf="col.filter == 'text'">
+								<input type="text" #box placeholder="{{'escrigui' | i18n}}..." (keyup)="filter(box.value, col.field)">
+								<span class="glyphicon glyphicon-remove" (click)="box.value = ''; filter(box.value, col.field);"></span>
+							</div>
+
+							<!-- tipo de filtro 'range' -->
+							<div *ngIf="col.filter == 'range'">
+								<span>
+									<input type="text" #box1 placeholder="{{'de' | i18n}}..." (keyup)="filter(box1.value, col.filterFields[0])">
+									|
+									<input type="text" #box2 placeholder="{{'a' | i18n}}..." (keyup)="filter(box2.value, col.filterFields[1])">
+								</span>
+								<span class="glyphicon glyphicon-remove" (click)="box1.value = ''; box2.value = ''; filter(box1.value, col.filterFields[0]); filter(box2.value, col.filterFields[1]);"></span>
+							</div>
+
+							<!-- tipo de filtro 'select' -->
+							<div *ngIf="col.filter == 'select'">
+								<select #box (change)="filter(box.value, col.field)" >
+									<option value=""></option>
+									<option *ngFor="#option of options[col.field]" value="{{option.key}}">{{option.value}}</option>
+								</select>
+								<span class="glyphicon glyphicon-remove" (click)="box.value = ''; filter(box.value, col.field);"></span>
+							</div>
+
+							<div *ngIf="col.filter == 'none'">&nbsp;</div>
+						</th>
 					</tr>
 				</tfoot>
 

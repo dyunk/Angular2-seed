@@ -29,8 +29,8 @@ export class HeroListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.enableSort = false;
-    this.enableFilter = false;
+    this.enableSort = true;
+    this.enableFilter = true;
     this.page = {
       actual: 0,
       firts: 0,

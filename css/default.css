@@ -6,3 +6,6 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+tfoot .glyphicon-remove {
+  cursor: pointer;
+}
